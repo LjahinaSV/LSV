@@ -1,0 +1,5 @@
+a = int(input())
+b = int(input())
+d1 = int(a // b)
+d2 = int(b // a)
+print(a * 0 ** d2 + b * 0 ** d1 + a * d1 * d2)
