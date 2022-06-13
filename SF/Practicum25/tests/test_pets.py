@@ -37,14 +37,21 @@ def test_all_pets():
     descriptions = pytest.driver.find_elements(By.CSS_SELECTOR, '.card-deck .card-text')
 
     for i in range(len(names)):
-        print('i =', i, 'names[i].text =', names[i].text)
-        assert images[i].get_attribute('src') != '', "Нет фото"
-        assert names[i].text != '', "Нет имени"
-        assert descriptions[i].text != '', "Поле порода и возраст - пустое"
-        assert ',' in descriptions[i].text
-        parts = descriptions[i].text.split(",")
-        assert len(parts[0]) > 0, "Нет названия породы"
-        assert len(parts[1]) > 0, "Нет возраста"
+        name = names[i].text
+        print('i =', i, 'names[i].text =', name)
+        image = images[i].get_attribute('src')
+        desc = descriptions[i].text
+        assert image != '' \
+               and image != 'https://petfriends.skillfactory.ru/static/images/upload2.jpg' \
+               and image != '(unknown)', "Нет фото"
+        assert name != '', "Нет имени"
+        assert desc != '' and desc != 'None, None лет', "Поле порода и возраст - пустое"
+        assert ',' in desc, 'Пропущена запятая в поле "порода, возраст"'
+        parts = desc.split(",")
+        print('parts[1]=', parts[1])
+        assert len(parts[0]) > 0 and parts[0] != 'None', "Нет названия породы"
+        assert len(parts[1]) > 0 and parts[1] != 'None лет' and parts[1] != ' лет', "Нет возраста"
+
 
 #  для запуска в Терминале меняем окружение на cd F:\__QAP\Pycharm\modul25\tests
 #  прописываем в терминал для запуска строку

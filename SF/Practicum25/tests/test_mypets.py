@@ -71,7 +71,7 @@ def test_my_pets():
     assert photo_presence >= (count_table // 2), 'Недостаточно питомцев с фотографиями'
 
     # Проверяем, что у питомцев заполнены все данные: имя, тип, возраст
-    # Формируем массив о всеми данными питомцев.
+    # Формируем массив со всеми данными питомцев.
     myList = []
     # Формируем массив только с именами питомцев
     myNames = []
@@ -85,10 +85,10 @@ def test_my_pets():
         stroka += name
         myNames.append(stroka)
         tip = pytest.driver.find_element(By.XPATH, cXpath + str(i) + "]/td[2]").text
-        assert tip != '', 'У питомца отсутствует порода'
+        assert tip != '' and tip != 'None', 'У питомца отсутствует порода'
         stroka += tip
         age = pytest.driver.find_element(By.XPATH, cXpath + str(i) + "]/td[3]").text
-        assert age != '', 'У питомца отсутствует возраст'
+        assert age != '' and age != 'None лет' and age != ' лет', 'У питомца отсутствует возраст'
         stroka += age
         myList.append(stroka)
     print(myList)
