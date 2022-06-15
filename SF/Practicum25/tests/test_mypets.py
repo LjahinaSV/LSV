@@ -72,9 +72,9 @@ def test_my_pets():
 
     # Проверяем, что у питомцев заполнены все данные: имя, тип, возраст
     # Формируем массив со всеми данными питомцев.
-    myList = []
+    my_list = []
     # Формируем массив только с именами питомцев
-    myNames = []
+    my_names = []
     # постоянная часть в Xpath
     cXpath = '//*[@id="all_my_pets"]/table/tbody/tr['
     for i in range(1, count_table + 1):
@@ -83,31 +83,31 @@ def test_my_pets():
         name = pytest.driver.find_element(By.XPATH, cXpath + str(i) + "]/td[1]").text
         assert name != '', 'У питомца отсутствует имя'
         stroka += name
-        myNames.append(stroka)
+        my_names.append(stroka)
         tip = pytest.driver.find_element(By.XPATH, cXpath + str(i) + "]/td[2]").text
         assert tip != '' and tip != 'None', 'У питомца отсутствует порода'
         stroka += tip
         age = pytest.driver.find_element(By.XPATH, cXpath + str(i) + "]/td[3]").text
         assert age != '' and age != 'None лет' and age != ' лет', 'У питомца отсутствует возраст'
         stroka += age
-        myList.append(stroka)
-    print(myList)
-    print(myNames)
-    assert myList != [], 'Массив пустой'
-    assert myNames != [], 'Массив имён пустой'
+        my_list.append(stroka)
+    print(my_list)
+    print(my_names)
+    assert my_list != [], 'Массив пустой'
+    assert my_names != [], 'Массив имён пустой'
     # Проверяем, что в списке нет повторяющейся информации о питомцах (имя, порода, возраст)
-    # Для этого сформируем новый массив из уникальных строк массива myList.
+    # Для этого сформируем новый массив из уникальных строк массива my_list.
     # Если длина массива осталась прежней, значит нет повторяющихся строк.
-    mySet = set(myList)
-    print('mySet=', mySet, ' len(mySet)=', len(mySet))
-    assert len(mySet) == count_table, 'В списке есть повторяющаяся информация о питомцах'
+    my_set = set(my_list)
+    print('my_set=', my_set, ' len(my_set)=', len(my_set))
+    assert len(my_set) == count_table, 'В списке есть повторяющаяся информация о питомцах'
 
     # Проверяем, что в списке нет повторяющихся имён питомцев
-    # Для этого сформируем новый массив из уникальных строк массива myNames.
+    # Для этого сформируем новый массив из уникальных строк массива my_names.
     # Если длина массива осталась прежней, значит нет повторяющихся имён.
-    mySet_Names = set(myNames)
-    print('mySet_Names=', mySet_Names, ' len(mySet_Names)=', len(mySet_Names))
-    assert len(mySet_Names) == count_table, 'В списке есть повторяющиеся имена питомцев'
+    my_set_names = set(my_names)
+    print('my_set_names=', my_set_names, ' len(my_set_names)=', len(my_set_names))
+    assert len(my_set_names) == count_table, 'В списке есть повторяющиеся имена питомцев'
 
 
 #  для запуска в Терминале меняем окружение на cd F:\__QAP\Pycharm\modul25\tests
