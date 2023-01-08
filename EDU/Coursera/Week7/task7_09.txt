@@ -1,0 +1,123 @@
+Частотный анализ
+Дан текст. Выведите все слова, встречающиеся в тексте, по одному на каждую строку.
+Слова должны быть отсортированы по убыванию их количества появления в тексте,
+а при одинаковой частоте появления — в лексикографическом порядке.
+
+Указание.
+После того, как вы создадите словарь всех слов, вам захочется отсортировать его
+по частоте встречаемости слова. Желаемого можно добиться, если создать список,
+элементами которого будут кортежи из двух элементов:
+частота встречаемости слова и само слово.
+Например, [(2, 'hi'), (1, 'what'), (3, 'is')].
+Тогда стандартная сортировка будет сортировать список кортежей,
+при этом кортежи сравниваются по первому элементу, а если они равны — то по второму.
+Это почти то, что требуется в задаче.
+
+Формат ввода
+Вводится текст.
+
+Формат вывода
+Выведите ответ на задачу.
+
+Примеры
+
+Тест 1
+Входные данные:
+hi
+hi
+what is your name
+my name is bond
+james bond
+my name is damme
+van damme
+claude van damme
+jean claude van damme
+
+Вывод программы:
+damme
+is
+name
+van
+bond
+claude
+hi
+my
+james
+jean
+what
+your
+
+
+
+Тест 2
+Входные данные:
+oh you touch my tralala
+mmm my ding ding dong
+
+Вывод программы:
+ding
+my
+dong
+mmm
+oh
+touch
+tralala
+you
+
+
+
+Тест 3
+Входные данные:
+ai ai ai ai ai ai ai ai ai ai
+
+Вывод программы:
+ai
+
+Курбонов Фаррухжон Рауфович
+Учащийся
+8 месяцев назад
+
+with open('input.txt') as inF:
+    lines, words = inF.readlines(), {}
+for line in lines:
+    line = line.split()
+    for word in line:
+        words[word] = words.get(word, 0) + 1
+words = sorted(words.items(), key=lambda item: [-int(item[1]), item[0]])
+for word, value in words:
+    print(word)
+
+#если хотите понять что делают последние 2 строки,
+то их можно записать так:
+
+for word in words:
+    print(word[0])
+
+Алексей Александрович Киреев
+Учащийся
+год назад
+
+words = {}
+in_file = open('input.txt')
+for w in in_file.read().split():
+    words[w] = words[w] + 1 if w in words else 1
+print(*sorted(words, key=lambda x: (-words[x], x)), sep='\n')
+# https://www.coursera.org/learn/python-osnovy-programmirovaniya/discussions/forums/tRO1zhU_Eee-IhKKoikHmg/threads/WI5PiioEEeyB0BKi2RWgHw
+ - Самое частое слово
+
+ 100/100. Согласно рекомендациям.
+Б
+Биленко Андрей Николаевич
+Учащийся
+2 года назад
+
+readfile = open('input.txt', 'r', encoding='utf-8')
+words = {}
+words_sorted = []
+for line in readfile:
+    for word in line.split():
+        words[word] = words.get(word, 0) + 1
+for key, item in words.items():
+    words_sorted.append((-item, key))
+for key, item in sorted(words_sorted):
+    print(item)
